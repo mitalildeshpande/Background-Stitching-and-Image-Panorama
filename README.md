@@ -1,20 +1,37 @@
-# Background-Stitching-and-Image-Panorama
+# Image Stitching & Panorama Construction
 
-Image Stitching:
+A computer vision project implementing two related techniques from scratch: **background stitching** (merging images with moving foregrounds) and **panorama construction** (multi-image seamless stitching) — using keypoint detection, homography, and OpenCV.
 
-Two or more images may have the same background but different foreground. For example, children playing in the park. They are basically moving in a scene. If this scene is being dividen into two images randomly. We need to stitch these images into one image eliminating foreground objects that move in the scene.
+## Two Modes
 
-Steps-
-1. Extract set of key points for each image.
-2. Extract features from each key point.
-3. Match features and use matches to determine if there is overlap between given pairs of images.
-4. Compute the homography between the overlapping pairs as needed.
-5. Transform images and stitch them into one mosaic, eliminating foreground without cropping the image.
+### 1. Background Stitching
+Merges two images that share the same background but have different moving foreground objects (e.g., people walking through a scene).
 
-Image Panorama:
+**Steps:**
+1. Extract keypoints from both images
+2. Extract and match features across keypoints
+3. Detect overlapping regions between image pairs
+4. Compute homography matrix between overlapping pairs
+5. Transform and stitch — eliminating moving foreground without cropping
 
-This is the panorama feature we have in our camera. Here I have stitched multiple images into one photo.
+### 2. Image Panorama
+Replicates the panorama feature of modern cameras by stitching multiple sequential photos into one seamless wide image.
 
-Steps-
-1. For each image, extract features, match features and determine the spatial overlaps of the images. 
-2. Perform Image transformation and stitch into one panoramic photo.
+**Steps:**
+1. Extract features from each image (SIFT/ORB)
+2. Match features across adjacent pairs
+3. Compute homography for alignment
+4. Warp and blend images into a single mosaic
+
+## Tech Stack
+
+`Python` · `OpenCV` · `NumPy` · `SIFT / ORB` · `Homography`
+
+## Setup
+
+```bash
+git clone https://github.com/mitalildeshpande/Background-Stitching-and-Image-Panorama.git
+cd Background-Stitching-and-Image-Panorama
+pip install opencv-python numpy
+python stitch.py
+```
